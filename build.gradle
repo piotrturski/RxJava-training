@@ -1,0 +1,50 @@
+group 'net.piotrturski'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '1.4.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile 'org.springframework.boot:spring-boot-starter-undertow'
+//    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+//    compile 'io.jmnarloch:rxjava-spring-boot-starter:1.0.0'
+
+    compile 'io.reactivex:rxjava:1.2.2'
+    compile 'org.apache.commons:commons-lang3:3.5'
+
+    testCompile('org.springframework.cloud:spring-cloud-starter-hystrix')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile 'io.jmnarloch:rxjava-spring-boot-starter:1.0.0'
+    testCompile 'org.glassfish.jersey.ext.rx:jersey-rx-client-rxjava:2.24.1'
+    testCompile 'io.reactivex:rxnetty:0.4.20'
+    testCompile 'org.apache.camel:camel-rx:2.18.0'
+    testCompile 'com.github.davidmoten:rxjava-jdbc:0.7.3'
+    testCompile 'org.postgresql:postgresql:9.4.1212'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR2"
+    }
+}
